@@ -16,7 +16,7 @@ class Product extends Seeder
          Model::create([
             'category_id' => 1,
             'name' => 'Teh Botol',
-            'image' => 'teh-botol.jpg',
+            'image' => 'products/teh-botol.jpg',
             'stock' => 50,
             'price' => 5000,
             'status' => 'active'
@@ -25,7 +25,7 @@ class Product extends Seeder
         Model::create([
             'category_id' => 2,
             'name' => 'Nasi Goreng',
-            'image' => 'nasi-goreng.jpg',
+            'image' => 'products/nasi-goreng.jpg',
             'stock' => 30,
             'price' => 15000,
             'status' => 'active'
@@ -34,7 +34,7 @@ class Product extends Seeder
         Model::create([
             'category_id' => 3,
             'name' => 'Sate Ayam',
-            'image' => 'sate-ayam.jpg',
+            'image' => 'products/sate-ayam.jpg',
             'stock' => 40,
             'price' => 20000,
             'status' => 'active'
@@ -43,9 +43,9 @@ class Product extends Seeder
         Model::create([
             'category_id' => 4,
             'name' => 'Rokok Surya',
-            'image' => 'rokok-surya.jpg',
+            'image' => 'products/rokok-surya.jpg',
             'stock' => 25,
-            'price' => 28000,
+            'price' => 3000,
             'status' => 'active'
         ]);
     }
