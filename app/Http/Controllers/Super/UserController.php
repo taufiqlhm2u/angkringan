@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Super;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -12,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.super.users.index');
     }
 
     /**
@@ -20,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.super.users.create');
     }
 
     /**
@@ -28,7 +31,43 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'role' => 'required',
+            'status' => 'required',
+            'password' => 'required|string|min:8|confirmed',
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'name.string' => 'Nama harus berupa teks.',
+
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan, silakan gunakan email lain.',
+
+            'role.required' => 'Role pengguna harus dipilih.',
+
+            'status.required' => 'Status pengguna harus dipilih.',
+
+            'password.required' => 'Kata sandi wajib diisi.',
+            'password.string' => 'Kata sandi harus berupa teks.',
+            'password.min' => 'Kata sandi minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
+        ]);
+
+        try {
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role' => $request->role,
+                'status' => $request->status,
+                'password' => Hash::make($request->password),
+            ]);
+
+            return redirect()->route('super.users.index')->with('sukses', 'Pengguna berhasil ditambahkan');
+        } catch (Exception $e) {
+            return back()->withInput()->with('error', 'Gagal menambahkan pengguna. Silakan coba lagi.');
+        } 
     }
 
     /**
@@ -60,6 +99,11 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            User::find($id)->delete();
+            return redirect()->route('super.users.index')->with('sukses', 'User Berhasil dihapus');
+        } catch (Exception) {
+            return back()->with('error', 'Gagal menghapus user');
+        }
     }
 }

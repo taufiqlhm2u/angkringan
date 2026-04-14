@@ -209,7 +209,7 @@ new class extends Component {
                             wire:click="confirmTwoFactor"
                             x-bind:disabled="$wire.code.length < 6"
                         >
-                            {{ __('Confirm') }}
+                            {{ __('Konfirmasi') }}
                         </flux:button>
                     </div>
                 </div>

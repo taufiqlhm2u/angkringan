@@ -120,12 +120,12 @@ new #[Title('Security settings')] class extends Component {
             <div class="flex items-center gap-4">
                 <div class="flex items-center justify-end">
                     <flux:button variant="primary" type="submit" class="w-full" data-test="update-password-button">
-                        {{ __('Save') }}
+                        {{ __('Simpan') }}
                     </flux:button>
                 </div>
 
                 <x-action-message class="me-3" on="password-updated">
-                    {{ __('Saved.') }}
+                    {{ __('Tersimpan.') }}
                 </x-action-message>
             </div>
         </form>

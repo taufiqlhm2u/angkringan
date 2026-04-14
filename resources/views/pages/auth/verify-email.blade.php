@@ -6,7 +6,7 @@
 
         @if (session('status') == 'verification-link-sent')
             <flux:text class="text-center font-medium !dark:text-green-400 !text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+                {{ __('Tautan verifikasi baru telah dikirim ke alamat email yang Anda berikan saat mendaftar.') }}
             </flux:text>
         @endif
 
@@ -21,7 +21,7 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <flux:button variant="ghost" type="submit" class="text-sm cursor-pointer" data-test="logout-button">
-                    {{ __('Log out') }}
+                    {{ __('Keluar') }}
                 </flux:button>
             </form>
         </div>

@@ -12,11 +12,11 @@ new #[Title('Appearance settings')] class extends Component {
 
     <flux:heading class="sr-only">{{ __('Appearance settings') }}</flux:heading>
 
-    <x-pages::settings.layout :heading="__('Appearance')" :subheading="__('Update the appearance settings for your account')">
+    <x-pages::settings.layout :heading="__('Tampilan')" :subheading="__('Update the appearance settings for your account')">
         <flux:radio.group x-data variant="segmented" x-model="$flux.appearance">
-            <flux:radio value="light" icon="sun">{{ __('Light') }}</flux:radio>
-            <flux:radio value="dark" icon="moon">{{ __('Dark') }}</flux:radio>
-            <flux:radio value="system" icon="computer-desktop">{{ __('System') }}</flux:radio>
+            <flux:radio value="light" icon="sun">{{ __('Terang') }}</flux:radio>
+            <flux:radio value="dark" icon="moon">{{ __('Gelap') }}</flux:radio>
+            <flux:radio value="system" icon="computer-desktop">{{ __('Sistem') }}</flux:radio>
         </flux:radio.group>
     </x-pages::settings.layout>
 </section>

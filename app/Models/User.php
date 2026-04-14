@@ -25,6 +25,31 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function getStatusColorAttribute()
+    {
+        return $this->status == 'active' ? 'green' : 'red';
+    }
+
+    public function getRoleColorAttribute()
+    {
+        $color = '';
+        switch ($this->role) {
+            case 'super':
+                $color = 'purple';
+                break;
+            case 'admin':
+                $color = 'teal';
+                break;
+            case 'kasir':
+                $color = 'amber';
+                break;
+            default:
+                $color = 'zinc';
+        }
+
+        return $color;
+    }
     /**
      * Get the attributes that should be cast.
      *
