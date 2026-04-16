@@ -17,37 +17,36 @@
                     name="name"
                     :label="__('Nama Lengkap')"
                     type="text"
-                    required
                     autofocus
                     :placeholder="__('Masukkan nama lengkap')"
+                    value="{{ old('name') }}"
                 />
 
                 <flux:input
                     name="email"
                     :label="__('Alamat Email')"
                     type="email"
-                    required
                     :placeholder="__('email@contoh.com')"
+                    value="{{ old('email') }}"
                 />
 
                 <!-- Role -->
-                <flux:select name="role" :label="__('Role')" :placeholder="__('Pilih Role')" required>
-                    <flux:select.option value="super">{{ __('Super Admin') }}</flux:select.option>
-                    <flux:select.option value="admin">{{ __('Admin') }}</flux:select.option>
-                    <flux:select.option value="user">{{ __('User') }}</flux:select.option>
+                <flux:select name="role" :label="__('Role')" :placeholder="__('Pilih Role')" >
+                    <flux:select.option value="super" :selected="old('role') == 'super'">{{ __('Super Admin') }}</flux:select.option>
+                    <flux:select.option value="admin" :selected="old('role') == 'admin'">{{ __('Admin') }}</flux:select.option>
+                    <flux:select.option value="user" :selected="old('role') == 'user'">{{ __('User') }}</flux:select.option>
                 </flux:select>
 
                 <!-- Status -->
-                <flux:select name="status" :label="__('Status')" :placeholder="__('Pilih Status')" required>
-                    <flux:select.option value="active">{{ __('Aktif') }}</flux:select.option>
-                    <flux:select.option value="inactive">{{ __('Tidak Aktif') }}</flux:select.option>
+                <flux:select name="status" :label="__('Status')" :placeholder="__('Pilih Status')" >
+                    <flux:select.option value="active" :selected="old('status') == 'active'">{{ __('Aktif') }}</flux:select.option>
+                    <flux:select.option value="inactive" :selected="old('status') == 'inactive'">{{ __('Tidak Aktif') }}</flux:select.option>
                 </flux:select>
                 
                 <flux:input
                     name="password"
                     :label="__('Kata Sandi')"
                     type="password"
-                    required
                     :placeholder="__('Masukkan kata sandi')"
                     viewable
                 />
@@ -57,7 +56,6 @@
                     name="password_confirmation"
                     :label="__('Konfirmasi Kata Sandi')"
                     type="password"
-                    required
                     :placeholder="__('Ulangi kata sandi')"
                     viewable
                 />

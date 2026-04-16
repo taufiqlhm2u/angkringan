@@ -6,8 +6,8 @@ use App\Models\User;
 new class extends Component {
     use \Livewire\WithPagination;
 
-    public $sortBy = 'created_at';
-    public $sortDirection = 'desc';
+    public $sortBy = 'name';
+    public $sortDirection = 'asc';
     public $search;
 
     public function sort($column)

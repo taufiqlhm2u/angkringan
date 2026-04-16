@@ -37,6 +37,7 @@ class UserController extends Controller
             'role' => 'required',
             'status' => 'required',
             'password' => 'required|string|min:8|confirmed',
+            "password_confirmation" => 'required'
         ], [
             'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',
@@ -53,6 +54,7 @@ class UserController extends Controller
             'password.string' => 'Kata sandi harus berupa teks.',
             'password.min' => 'Kata sandi minimal 8 karakter.',
             'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
+            'password_confirmation.required' => 'Konfirmasi kata sandi wajib diisi.',
         ]);
 
         try {
