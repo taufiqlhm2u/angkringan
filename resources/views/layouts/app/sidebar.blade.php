@@ -13,12 +13,16 @@
             <flux:sidebar.nav>
                 <flux:sidebar.group :heading="__('Menu Utama')" class="grid">
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dasbor') }}
+                        {{ __('Dashboard') }}
                     </flux:sidebar.item>
 
-                    <flux:sidebar.item icon="users" :href="route('super.users.index')" :current="request()->routeIs('super.users*')" wire:navigate>
+                </flux:sidebar.group>
+                <flux:sidebar.group :heading="__('Manajemen')" class="grid">
+                    @if (auth()->user()->role == 'super')
+                        <flux:sidebar.item icon="users" :href="route('super.users.index')" :current="request()->routeIs('super.users*')" wire:navigate>
                         {{ __('Pengguna') }}
                     </flux:sidebar.item>
+                    @endif
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 

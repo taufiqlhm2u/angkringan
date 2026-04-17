@@ -6,6 +6,10 @@
                 <flux:subheading size="lg" class="text-zinc-500 dark:text-zinc-400">
                     {{ __('Kelola pengguna yang memiliki akses ke sistem.') }}</flux:subheading>
             </div>
+            <flux:button href="{{ route('super.users.create') }}" class="bg-blue-600 text-white hover:bg-blue-700"
+                icon="plus" variant="primary">
+                {{ __('Tambah') }}
+            </flux:button>
         </div>
 
         <flux:separator variant="subtle" />

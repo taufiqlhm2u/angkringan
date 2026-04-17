@@ -35,9 +35,10 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'role' => 'required',
-            'status' => 'required',
+            'no_telp' => 'required|regex:/^[0-9]+$/',
             'password' => 'required|string|min:8|confirmed',
-            "password_confirmation" => 'required'
+            "password_confirmation" => 'required',
+            'address' => 'required'
         ], [
             'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',
@@ -48,13 +49,16 @@ class UserController extends Controller
 
             'role.required' => 'Role pengguna harus dipilih.',
 
-            'status.required' => 'Status pengguna harus dipilih.',
+            'no_telp.required' => 'No telepon wajib di isi.',
+            'no_telp.regex' => 'Pastikan menggunkan format yang benar! (08xxx).',
 
             'password.required' => 'Kata sandi wajib diisi.',
             'password.string' => 'Kata sandi harus berupa teks.',
             'password.min' => 'Kata sandi minimal 8 karakter.',
             'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
             'password_confirmation.required' => 'Konfirmasi kata sandi wajib diisi.',
+
+            'address.required' => 'Alamat wajib di isi'
         ]);
 
         try {
@@ -62,7 +66,9 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'role' => $request->role,
-                'status' => $request->status,
+                'status' => 'active',
+                'phone_number' => $request->no_telp,
+                'address' => $request->address,
                 'password' => Hash::make($request->password),
             ]);
 
