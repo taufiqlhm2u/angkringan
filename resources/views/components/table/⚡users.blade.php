@@ -149,7 +149,7 @@ new class extends Component {
                                 {{ $user->phone_number }}
                             </flux:table.cell>
                             <flux:table.cell class="text-zinc-500 dark:text-zinc-400">
-                                {{ $user->address }}
+                                {{ Str::limit($user->address, 25, '...') }}
                             </flux:table.cell>
                             <flux:table.cell>
 
@@ -160,7 +160,8 @@ new class extends Component {
                             <flux:table.cell>
                                 <div class="relative inline-block">
                                     <flux:field>
-                                        <flux:switch :checked="$user->status == 'active'" class="bg-green-500"
+                                        <flux:switch :checked="$user->status == 'active'"
+                                            class="data-checked:bg-green-400! data-checked:border-green-400!"
                                             wire:key="switch-{{ $user->id }}-{{ $this->switchKeys[$user->id] ?? 0 }}" />
                                     </flux:field>
                                     <div wire:click="confirmToggleStatus({{ $user->id }})" class="absolute inset-0 cursor-pointer"></div>
@@ -182,7 +183,7 @@ new class extends Component {
                                         @method('DELETE')
 
                                         <div>
-                                            <flux:heading size="lg">{{ __('Konfirmasi Hapus') }}</flux:heading>
+                                            <flux:heading size="xl">{{ __('Konfirmasi Hapus') }}</flux:heading>
                                             <flux:subheading>
                                                 {{ __('Apakah Anda yakin ingin menghapus pengguna ini? Tindakan ini tidak dapat dibatalkan.') }}
                                             </flux:subheading>
@@ -218,7 +219,7 @@ new class extends Component {
         <div class="space-y-6">
 
             <div>
-                <flux:heading size="lg">
+                <flux:heading size="xl">
                     Konfirmasi Perubahan Status
                 </flux:heading>
 

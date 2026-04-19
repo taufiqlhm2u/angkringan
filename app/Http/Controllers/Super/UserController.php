@@ -35,7 +35,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'role' => 'required',
-            'no_telp' => 'required|regex:/^[0-9]+$/',
+            'no_telp' => 'required|regex:/^[0-9]+$/|unique:users,phone_number',
             'password' => 'required|string|min:8|confirmed',
             "password_confirmation" => 'required',
             'address' => 'required'
@@ -51,6 +51,7 @@ class UserController extends Controller
 
             'no_telp.required' => 'No telepon wajib di isi.',
             'no_telp.regex' => 'Pastikan menggunkan format yang benar! (08xxx).',
+            'no_telp.unique' => 'No. telp sudah digunakan, silakan gunakan no. telp lain.',
 
             'password.required' => 'Kata sandi wajib diisi.',
             'password.string' => 'Kata sandi harus berupa teks.',
@@ -58,7 +59,7 @@ class UserController extends Controller
             'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
             'password_confirmation.required' => 'Konfirmasi kata sandi wajib diisi.',
 
-            'address.required' => 'Alamat wajib di isi'
+            'address.required' => 'Alamat wajib di isi.'
         ]);
 
         try {
@@ -75,7 +76,7 @@ class UserController extends Controller
             return redirect()->route('super.users.index')->with('sukses', 'Pengguna berhasil ditambahkan');
         } catch (Exception $e) {
             return back()->withInput()->with('error', 'Gagal menambahkan pengguna. Silakan coba lagi.');
-        } 
+        }
     }
 
     /**
@@ -91,7 +92,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('pages.super.users.edit', compact('user'));
     }
 
     /**
@@ -99,7 +101,56 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,'. $id,
+            'role' => 'required',
+            'no_telp' => 'required|regex:/^[0-9]+$/|unique:users,phone_number,'. $id,
+            'password' => 'nullable|string|min:8|confirmed',
+            "password_confirmation" => 'nullable',
+            'address' => 'required'
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'name.string' => 'Nama harus berupa teks.',
+
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan, silakan gunakan email lain.',
+
+            'role.required' => 'Role pengguna harus dipilih.',
+
+            'no_telp.required' => 'No telepon wajib di isi.',
+            'no_telp.regex' => 'Pastikan menggunkan format yang benar! (08xxx).',
+            'no_telp.unique' => 'No. telp sudah digunakan, silakan gunakan no. telp lain.',
+
+            'password.string' => 'Kata sandi harus berupa teks.',
+            'password.min' => 'Kata sandi minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
+
+            'address.required' => 'Alamat wajib di isi.'
+        ]);
+
+        try {
+            $user = User::findOrFail($id);
+            $password = $user->password;
+
+            if ($request->filled('password')) {
+                $password = Hash::make($request->password);
+            }
+
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone_number' => $request->no_telp,
+                'role' => $request->role,
+                'password' => $password,
+                'address' => $request->address
+            ]);
+
+            return redirect()->route('super.users.index')->with('sukses', 'Data User berhasil diupdate');
+        } catch(Exception $e) {
+            return back()->with('error', 'Gagal update data user')->withInput();
+        }
     }
 
     /**

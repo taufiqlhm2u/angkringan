@@ -30,7 +30,7 @@
                 </flux:select>
 
                 <!-- Status -->
-                <flux:input type="number" name="no_telp" :label="__('No. telp')" :placeholder="__('08XXXX')" viewable>
+                <flux:input type="number" name="no_telp" :label="__('No. telp')" value="{{ old('no_telp') }}" :placeholder="__('08XXXX')" viewable>
                 </flux:input>
 
                 <flux:input name="password" :label="__('Kata Sandi')" type="password"
@@ -40,7 +40,7 @@
                 <flux:input name="password_confirmation" :label="__('Konfirmasi Kata Sandi')" type="password"
                     :placeholder="__('Ulangi kata sandi')" viewable />
             </div>
-            <flux:textarea :label="__('Alamat')" name="address" placeholder="Masukan alamat lengkap" viewable />
+            <flux:textarea :label="__('Alamat')" name="address" placeholder="Masukan alamat lengkap" viewable >{{ old('address') }}</flux:textarea>
             @error('address')
                 <div class="text-red-400 text-sm">{{ $message }}</div>
             @enderror

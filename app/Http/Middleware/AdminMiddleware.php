@@ -7,18 +7,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role != $role) {
-            abort(403);
+        if (Auth::user()->role == 'admin' || Auth::user()->role == 'super') {
+            return $next($request);
         }
-        return $next($request);
+
+        abort(403);
     }
 }
