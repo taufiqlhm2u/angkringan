@@ -1,8 +1,8 @@
-<x-layouts::app :title="__('Update Pengguna')">
+<x-layouts::app :title="__('Edit Pengguna')">
     <div class="flex flex-col gap-6 w-full">
         <div class="flex items-center justify-between">
             <div>
-                <flux:heading size="xl" level="1">{{ __('Update User') }}</flux:heading>
+                <flux:heading size="xl" level="1">{{ __('Edit User') }}</flux:heading>
             </div>
         </div>
 
