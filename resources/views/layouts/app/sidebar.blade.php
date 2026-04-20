@@ -34,7 +34,7 @@
                         :current="request()->routeIs('admin.category*')" wire:navigate>{{ __('Kategori Produk') }}
                     </flux:sidebar.item>
                     <flux:sidebar.item icon="cube" :href="route('admin.product.index')"
-                        :current="request()->routeIs('admin.produk*')">{{ __('Produk') }}</flux:sidebar.item>
+                        :current="request()->routeIs('admin.product*')">{{ __('Produk') }}</flux:sidebar.item>
                 </flux:sidebar.group>
                 <flux:sidebar.group class="group" :heading="__('Laporan')" class="grid"></flux:sidebar.group>
                 @endif
