@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use function Laravel\Prompts\number;
+
 class Product extends Model
 {
     protected $guarded = [];
@@ -16,5 +18,10 @@ class Product extends Model
     public function TransactionDetails()
     {
         return $this->hasMany(TransactionDetail::class);
+    }
+
+    public function getFormatPriceAttribute()
+    {
+        return number_format($this->price, 0, '.', '.');
     }
 }
