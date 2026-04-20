@@ -1,4 +1,4 @@
-<x-layouts::app :title="__('Daftar Pengguna')">
+<x-layouts::app :title="__('Daftar Kategori')">
     <div class="flex flex-col gap-6 w-full">
         <div class="flex items-center justify-between">
             <div>
